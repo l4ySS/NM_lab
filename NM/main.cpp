@@ -25,14 +25,17 @@ void main(){
 	Vector K(nums6, 5);
 	Vector L(nums6, 5);
 
-	A.randomFill(1, 4);
-	B.randomFill(1, 4);
-	C.randomFill(1, 4);
-	P.randomFill(1, 4);
-	Q.randomFill(1, 4);
+	A.randomFill(1, 5);
+	B.randomFill(1, 5);
+	C.randomFill(1, 5);
+	P.randomFill(1, 5);
+	Q.randomFill(1, 5);
 	Q[4] = A[5];
 	P[2] = C[1];
+
+
 	Matrix M(A, B, C, P, Q, F);
+	Matrix M2(A, B, C, P, Q, F);
 	std::cout << M;
 //	std::cout << "kek3\n";
 	//A[0] = 4;
@@ -53,7 +56,7 @@ void main(){
 	std::cout << L << "\n\n\n";
 	std::cout << M << "\n";
 	std::cout << "kek" << "\n";
-	K = M.multiply(L);
+	K = M2.multiply(L);
 	std::cout << K << "\n";
 
 

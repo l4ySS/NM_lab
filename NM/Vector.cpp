@@ -149,7 +149,6 @@ void Vector::write(std::string filename) {
 }
 
 void Vector::randomFill(int a, int b) {
-	srand(time(0)); 
 	for(int i = 1; i < size+1; i++)
 	nums[i] = a + rand() % (b - a + 1);
 }

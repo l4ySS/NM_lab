@@ -150,8 +150,7 @@ void Matrix::write(std::string filename) {
 
 Vector Matrix::solution() {
 	double R;
-	double* r = new double[size + 1];
-
+	Vector r(size+1);
 	r[2] = a[2];
 	for (int i = 2; i < size; i++) {
 		try {
@@ -214,11 +213,11 @@ Vector Matrix::solution() {
 		p[size] -= b[size] * p[size];
 		std::cout << p[size] << "\n";*/
 		for (int i = 2; i < size; i++)	{
-			R = a[i];
-			a[i] = 0;
+			R = r[i];
+			r[i] = 0;
 			f[i] -= R * f[size];
 		}
-
+		a = r;
 		Vector x(size);
 		x[size] = f[size];
 		for (int i = size - 1; i >= 2; i--) {
