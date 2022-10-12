@@ -153,14 +153,12 @@ Vector Matrix::solution() {
 	Vector r(size+1);
 	r[2] = a[2];
 	for (int i = 2; i < size; i++) {
-		try {
-			if (b[i] == 0) throw i;
-			R = 1 / b[i];
-		}
-		catch(int a) {
-			std::cout << "\nError: b[" << i << "] = " << 0 << "\n";
+		if (b[i] == 0) {
+			std::cout << "Error";
 			return f;
 		}
+			R = 1 / b[i];
+
 		b[i] = 1;
 		r[i] *= R;
 		c[i] *= R;

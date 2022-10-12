@@ -32,8 +32,11 @@ void main(){
 	Q.randomFill(1, 5);
 	Q[4] = A[5];
 	P[2] = C[1];
-
-
+	std::cout << A << "\n";
+	std::cout << B << "\n";
+	std::cout << C << "\n";
+	std::cout << P << "\n";
+	std::cout << Q << "\n\n\n" ;
 	Matrix M(A, B, C, P, Q, F);
 	Matrix M2(A, B, C, P, Q, F);
 	std::cout << M;
