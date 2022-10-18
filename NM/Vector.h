@@ -2,15 +2,16 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
-
+#include <math.h>
 
 class Vector {
 	int size;
 	double* nums;
 public:
 	Vector();
-	Vector(int size);
-	Vector(double* _nums, int size);
+	Vector(int _size);
+	Vector(double* _nums, int _size); // 
+	Vector(int _size, double val); // create Vector with _size and fill it with val
 	double& operator[](int i);
 	double& operator[](int i) const;
 	
@@ -23,9 +24,13 @@ public:
 
 	Vector operator +(Vector A);
 	Vector operator -(Vector A);
+	Vector operator +(double A);
+	Vector operator -(double A);
 	Vector operator=(const Vector &A);
 	Vector operator +=(Vector A);
+	Vector operator +=(double A);
 	Vector operator -=(Vector A);
+	Vector operator -=(double A);
     double dotProduct(Vector A);
 	double norm();
 

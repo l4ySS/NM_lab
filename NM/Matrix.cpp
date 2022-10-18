@@ -1,7 +1,7 @@
 #pragma once
 #include "Matrix.h"
 
-Matrix::Matrix(Vector _a, Vector _b, Vector _c, Vector _p, Vector _q, Vector _f) : a(_a), b(_b), c(_c), p(_p), q(_q), f(_f), size(b.getSize()) {
+Matrix::Matrix(Vector _a, Vector _b, Vector _c, Vector _p, Vector _q) : a(_a), b(_b), c(_c), p(_p), q(_q), size(b.getSize()) {
 
 	a.setSize(size);
 	a[1] = 0;
@@ -27,7 +27,6 @@ Matrix Matrix::operator+=(Matrix A) {
 	c += A.c;
 	p += A.p;
 	q += A.q;
-	f += A.f;
 	return *this;
 }
 
@@ -38,7 +37,6 @@ Matrix Matrix::operator-=(Matrix A) {
 	c -= A.c;
 	p -= A.p;
 	q -= A.q;
-	f -= A.f;
 	return *this;
 }
 
@@ -49,7 +47,6 @@ Matrix Matrix::operator =(Matrix A) {
 	c = A.c;
 	p = A.p;
 	q = A.q;
-	f = A.f;
 	return *this;
 }
 
@@ -148,89 +145,180 @@ void Matrix::write(std::string filename) {
 
 
 
-Vector Matrix::solution() {
+Vector Matrix::solution(Vector F) {
 	double R;
 	Vector r(size+1);
 	r[2] = a[2];
 	for (int i = 2; i < size; i++) {
 		if (b[i] == 0) {
 			std::cout << "Error";
-			return f;
+			return F;
 		}
-			R = 1 / b[i];
+		R = 1 / b[i];
 
 		b[i] = 1;
 		r[i] *= R;
 		c[i] *= R;
-		f[i] *= R;
-
+		F[i] *= R;
 
 		R = a[i + 1];
 		a[i + 1] = 0;
 		r[i + 1] = -R * r[i];
 		b[i + 1] -= R * c[i];
-		f[i + 1] -= R * f[i];
+		F[i + 1] -= R * F[i];
 
 		R = p[i];
 		p[i] = 0;
 		p[1] -= R * r[i];
 		p[i + 1] -= R * c[i];
-		f[1] -= R * f[i];
+		F[1] -= R * F[i];
 
 		R = q[i];
 		q[i] = 0;
 		q[1] -= R * r[i];
 		q[i + 1] -= R * c[i];
-		f[size] -= R * f[i];
-
+		F[size] -= R * F[i];
 	}
-		c[1] = p[2];
-		try {
-			if (p[1] == 0) throw p[1];
-			R = 1 / p[1];
-		}
-		catch (double) {
-			std::cout << "\nError: p[" << 1 << "] = " << 0 << "\n";
-			return f;
-		}
+		c[1] = p[2];		
+		if (p[1] == 0) {
+			std::cout << "Error";
+			return F;
+		};
+		R = 1 / p[1];
+
 		p[1] = 1;
 		p[size] *= R;
-		f[1] *= R;
+		F[1] *= R;
 
 		R = q[1];
 		q[1] = 0;
 		q[size] -= R * p[size]; 
-		f[size] -= R * f[1];
+		F[size] -= R * F[1];
 
-		R = q[size];
+		R = 1/q[size];
 		q[size] = 1;
 		b[size] = 1;
-		f[size] *= R;
+		F[size] *= R;
 
-		/*std::cout << "\n" << b[size] << "\n" << p[size] << "\n";
-		p[size] -= b[size] * p[size];
-		std::cout << p[size] << "\n";*/
+		R = p[size];
+		p[size] = 0;
+		F[1] -= q[size] * R;
+
 		for (int i = 2; i < size; i++)	{
 			R = r[i];
 			r[i] = 0;
-			f[i] -= R * f[size];
+			F[i] -= R * F[size];
 		}
-		a = r;
+
 		Vector x(size);
-		x[size] = f[size];
+		x[size] = F[size];
 		for (int i = size - 1; i >= 2; i--) {
-			x[i] = f[i] - c[i] * x[i + 1];
+			x[i] = F[i] - c[i] * x[i + 1];
 		}
-		x[1] = f[1] - p[size] * x[size];
+		x[1] = F[1] - p[size] * x[size];
 
+		
 	return x;
-
 };
 
 
 
 
-
+//
+//Vector Matrix::algh(Vector F, Vector& X_star) {
+//	double R;
+//	Vector r(size + 1);
+//	Vector F_star(size + 1, 1);
+//	r[2] = a[2];
+//	for (int i = 2; i < size; i++) {
+//		if (b[i] == 0) {
+//			std::cout << "Error";
+//			return F;
+//		}
+//		R = 1 / b[i];
+//
+//		b[i] = 1;
+//		r[i] *= R;
+//		c[i] *= R;
+//		F[i] *= R;
+//		F_star[i] *= R;
+//		//	std::cout.precision(3);
+//		//	std::cout << *this << "\n\n" << F << "F * " << R << " \n\n\n";
+//
+//		R = a[i + 1];
+//		a[i + 1] = 0;
+//		r[i + 1] = -R * r[i];
+//		b[i + 1] -= R * c[i];
+//		F[i + 1] -= R * F[i];
+//		F_star[i + 1] -= R * F_star[i];
+//
+//		R = p[i];
+//		p[i] = 0;
+//		p[1] -= R * r[i];
+//		p[i + 1] -= R * c[i];
+//		F[1] -= R * F[i];
+//		F_star[1] -= R * F_star[i];
+//
+//		R = q[i];
+//		q[i] = 0;
+//		q[1] -= R * r[i];
+//		q[i + 1] -= R * c[i];
+//		F[size] -= R * F[i];
+//		F_star[size] -= R * F_star[i];
+//	}
+//	c[1] = p[2];
+//	if (p[1] == 0) {
+//		std::cout << "Error";
+//		return F;
+//	};
+//	R = 1 / p[1];
+//
+//	p[1] = 1;
+//	p[size] *= R;
+//	F[1] *= R;
+//	F_star[1] *= R;
+//
+//	R = q[1];
+//	q[1] = 0;
+//	q[size] -= R * p[size];
+//	F[size] -= R * F[1];
+//	F_star[size] -= R * F[1];
+//
+//	R = 1 / q[size];
+//	q[size] = 1;
+//	b[size] = 1;
+//	F[size] *= R;
+//	F_star[size] *= R;
+//
+//	R = p[size];
+//	p[size] = 0;
+//	F[1] -= q[size] * R;
+//	F_star[1] -= q[size] * R;
+//
+//	for (int i = 2; i < size; i++) {
+//		R = r[i];
+//		r[i] = 0;
+//		F[i] -= R * F[size];
+//		F_star[i] -= R * F_star[size];
+//	}
+//
+//	Vector x(size);
+//	x[size] = F[size];
+//	for (int i = size - 1; i >= 2; i--) {
+//		x[i] = F[i] - c[i] * x[i + 1];
+//	}
+//	x[1] = F[1] - p[size] * x[size];
+//
+//	X_star[size] = F_star[size];
+//	for (int i = size - 1; i >= 2; i--) {
+//		X_star[i] = F_star[i] - c[i] * X_star[i + 1];
+//	}
+//	X_star[1] = F_star[1] - p[size] * X_star[size];
+//	Vector One(size + 1, 1);
+//	X_star -= One;
+//	std::cout << "\nEstim = " << X_star.norm() << "\n";
+//	return x;
+//};
 
 
 

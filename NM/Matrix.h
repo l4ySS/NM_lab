@@ -1,11 +1,11 @@
 #pragma once
 #include "Vector.h"
 class Matrix {
-	Vector a, b, c, p, q, f;
+	Vector a, b, c, p, q;
 	int size;
 public:
-	Matrix():a(),b(),c(),p(), q(), f(), size(0) {};
-	Matrix(Vector _a, Vector _b, Vector _c, Vector _p, Vector _q, Vector _f);
+	Matrix():a(),b(),c(),p(), q(), size(0) {};
+	Matrix(Vector _a, Vector _b, Vector _c, Vector _p, Vector _q);
 	int getSize();
 	void setSize(int _size);
 
@@ -21,6 +21,6 @@ public:
 
 	void read(std::string filename);
 	void write(std::string filename);
-	Vector solution();
+	Vector solution(Vector F);
 	
 };

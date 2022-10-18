@@ -10,16 +10,23 @@ Vector::Vector() {
 Vector::Vector(int _size) {
 	size = _size;
 	nums = new double[size+1];
+	nums[0] = 0;
 	for (int i = 1; i < size + 1; i++) nums[i] = 0;
 }
 
 Vector::Vector(double* _nums, int _size) {
 	size = _size;
 	nums = new double[size + 1];
+	nums[0] = 0;
 	for (int i = 1; i < _size + 1; i++)
 		nums[i] = _nums[i-1];
 }
-
+Vector::Vector(int _size, double val) {
+	size = _size;
+	nums = new double[size + 1];
+	nums[0] = 0;
+	for (int i = 1; i < size + 1; i++) nums[i] = val;
+};
 
 
 double& Vector::operator[](int i)
@@ -66,7 +73,15 @@ Vector Vector::operator+(Vector A) {
 	Vector Temp;
 	Temp.setSize(A.getSize());
 	for (int i = 1; i < getSize() + 1; i++)
-		Temp[i] += A[i];
+		Temp[i] = this->nums[i] + A[i];
+	return Temp;
+};
+
+Vector Vector::operator+(double A) {
+	Vector Temp;
+	Temp.setSize(size);
+	for (int i = 1; i < getSize() + 1; i++)
+		Temp[i] = this->nums[i] + A;
 	return Temp;
 };
 
@@ -74,9 +89,17 @@ Vector Vector::operator-(Vector A) {
 	Vector Temp;
 	Temp.setSize(A.getSize());
 	for (int i = 1; i < getSize() + 1; i++) 
-		Temp[i] -= A[i];
+		Temp[i] = this->nums[i] - A[i];
 	return Temp;
 }
+
+Vector Vector::operator-(double A) {
+	Vector Temp;
+	Temp.setSize(size);
+	for (int i = 1; i < getSize() + 1; i++)
+		Temp[i] = this->nums[i] - A;
+	return Temp;
+};
 
 Vector Vector::operator=(const Vector &A) {
 	size = A.getSize();
@@ -91,9 +114,21 @@ Vector Vector::operator+=(Vector A) {
 	return *this;
 };
 
+Vector Vector::operator+=(double A) {
+	for (int i = 1; i < getSize() + 1; i++)
+		nums[i] += A;
+	return *this;
+};
+
 Vector Vector::operator-=(Vector A) {
-	for (int i = 1; i < getSize() + 1; i++) 
+	for (int i = 1; i < getSize() + 1; i++)
 		nums[i] -= A[i];
+	return *this;
+}
+
+Vector Vector::operator-=(double A) {
+	for (int i = 1; i < getSize() + 1; i++)
+		nums[i] -= A;
 	return *this;
 }
 
@@ -107,11 +142,24 @@ double Vector::dotProduct(Vector A) {
 };
 
 double Vector::norm(){
-	int max = nums[1];
-	for (int i = 1; i < getSize() + 1; i++) 
+	double max = nums[1];
+	for (int i = 1; i < getSize() + 1; i++)
 		if (max < abs(nums[i])) max = abs(nums[i]);
 	return max;
 }
+
+//double Vector::norm() {
+//	double max;
+//
+//	if(nums[1] > 0) max = nums[1];
+//	else max = nums[1]*( - 1);
+//
+//	for (int i = 1; i < getSize() + 1; i++)
+//			if ((nums[i] > 0)&&(max < nums[i])) max = nums[i];
+//			else if(max < (-1)*nums[i]) max = nums[i] *( - 1);
+//
+//	return max;
+//}
 
 std::ostream& operator<<(std::ostream& out, Vector& A) {
 	int i = 1;
