@@ -25,20 +25,36 @@ void main(){
 	//default:
 //	std::cout << abs(-2.3) << "\nWrong command!\n";
 	
-	double nums1[] = { 4, -1, -1, -1, -1 };
+	/*double nums1[] = { 4, -1, -1, -1, -1 };
 	double nums2[] = { -1, -1, -1, -1 };
 	double nums3[] = { 4, 4, 4, 4, 4 };
 	double nums4[] = { -1, -1, -1, -1 };
-	double nums5[] = { -1, -1, -1, -1, 4 };
+	double nums5[] = { -1, -1, -1, -1, 4 };*/
+
+	double* nums1 = new double[5];
+	double* nums2 = new double[5];
+	double* nums3 = new double[5];
+	double* nums4 = new double[5];
+	double* nums5 = new double[5];
 
 	double nums6[] = { 2, 3, 5, 8, 4 };
 	double nums7[] = { 2, 3, 5, 8, 4 };
-	Vector A(nums2, 5);
+	int size = 5;
+	Vector A(5);
+	Vector B(5);
+	Vector C(5);
+	Vector P(5);
+	Vector Q(5);
+	A.randomFill(1, 5);
+	B.randomFill(1, 5);
+	C.randomFill(1, 5);
+	P.randomFill(1, 5);
+	Q.randomFill(1, 5);
+	B[1] = P[1];
+	C[1] = P[2];
 
-	Vector B(nums3, 5);
-	Vector C(nums4, 5);
-	Vector P(nums1, 5);
-	Vector Q(nums5, 5);
+	A[size] = Q[size - 1];
+	B[size] = Q[size];
 
 	Vector F(nums6, 5);
 	Vector X(nums6, 5);

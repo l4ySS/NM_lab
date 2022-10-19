@@ -24,13 +24,9 @@ public:
 
 	Vector operator +(Vector A);
 	Vector operator -(Vector A);
-	Vector operator +(double A);
-	Vector operator -(double A);
 	Vector operator=(const Vector &A);
 	Vector operator +=(Vector A);
-	Vector operator +=(double A);
 	Vector operator -=(Vector A);
-	Vector operator -=(double A);
     double dotProduct(Vector A);
 	double norm();
 

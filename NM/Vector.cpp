@@ -77,13 +77,6 @@ Vector Vector::operator+(Vector A) {
 	return Temp;
 };
 
-Vector Vector::operator+(double A) {
-	Vector Temp;
-	Temp.setSize(size);
-	for (int i = 1; i < getSize() + 1; i++)
-		Temp[i] = this->nums[i] + A;
-	return Temp;
-};
 
 Vector Vector::operator-(Vector A) {
 	Vector Temp;
@@ -93,13 +86,7 @@ Vector Vector::operator-(Vector A) {
 	return Temp;
 }
 
-Vector Vector::operator-(double A) {
-	Vector Temp;
-	Temp.setSize(size);
-	for (int i = 1; i < getSize() + 1; i++)
-		Temp[i] = this->nums[i] - A;
-	return Temp;
-};
+
 
 Vector Vector::operator=(const Vector &A) {
 	size = A.getSize();
@@ -114,11 +101,7 @@ Vector Vector::operator+=(Vector A) {
 	return *this;
 };
 
-Vector Vector::operator+=(double A) {
-	for (int i = 1; i < getSize() + 1; i++)
-		nums[i] += A;
-	return *this;
-};
+
 
 Vector Vector::operator-=(Vector A) {
 	for (int i = 1; i < getSize() + 1; i++)
@@ -126,11 +109,7 @@ Vector Vector::operator-=(Vector A) {
 	return *this;
 }
 
-Vector Vector::operator-=(double A) {
-	for (int i = 1; i < getSize() + 1; i++)
-		nums[i] -= A;
-	return *this;
-}
+
 
 double Vector::dotProduct(Vector A) {
 	if (size != A.getSize()) return 0;
@@ -197,6 +176,8 @@ void Vector::write(std::string filename) {
 }
 
 void Vector::randomFill(int a, int b) {
-	for(int i = 1; i < size+1; i++)
-	nums[i] = a + rand() % (b - a + 1);
+	for (int i = 1; i < size + 1; i++) {
+		nums[i] = a + rand() % (b - a + 1);
+		srand(i);
+	}
 }

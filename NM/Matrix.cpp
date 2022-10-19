@@ -194,7 +194,12 @@ Vector Matrix::solution(Vector F) {
 		q[1] = 0;
 		q[size] -= R * p[size]; 
 		F[size] -= R * F[1];
-
+		
+		if (q[size] == 0) {
+			std::cout << "Error";
+			return F;
+		};
+		
 		R = 1/q[size];
 		q[size] = 1;
 		b[size] = 1;
