@@ -5,6 +5,7 @@ double relError(Vector A, Vector B, Vector C, Vector P, Vector Q, Vector X_corr)
 
 
 void main(){
+	srand(time(nullptr));
 	//std::cout << "" << "";
 	//std::cout << "" << "";
 	//std::cout << "" << "";
@@ -37,14 +38,14 @@ void main(){
 	double* nums4 = new double[5];
 	double* nums5 = new double[5];
 
-	double nums6[] = { 2, 3, 5, 8, 4 };
-	double nums7[] = { 2, 3, 5, 8, 4 };
+	double nums6[] = { 2, 3, 5, 8, 4};
+	double nums7[] = { 2, 3, 5, 8, 4};
 	int size = 5;
-	Vector A(5);
-	Vector B(5);
-	Vector C(5);
-	Vector P(5);
-	Vector Q(5);
+	Vector A(size);
+	Vector B(size);
+	Vector C(size);
+	Vector P(size);
+	Vector Q(size);
 	A.randomFill(1, 5);
 	B.randomFill(1, 5);
 	C.randomFill(1, 5);
@@ -58,7 +59,6 @@ void main(){
 
 	Vector F(nums6, 5);
 	Vector X(nums6, 5);
-	Vector X_star(nums7, 5);
 	Vector L(nums6, 5);
 	Matrix M(A, B, C, P, Q);
 	std::cout << M << "\n\n";
@@ -66,8 +66,8 @@ void main(){
 	F = M.multiply(X);
 	std::cout << "F = " << F << "\n\n";
 	X = M.solution(F);
+	std::cout  << "Error = "  << relError(A, B, C, P, Q, L) << "\n";
 	std::cout << "Answer = " << X << "\n\n";
-	std::cout  << "Error = "  << relError(A, B, C, P, Q, L);
 }
 
 

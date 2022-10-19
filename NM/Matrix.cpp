@@ -151,7 +151,7 @@ Vector Matrix::solution(Vector F) {
 	r[2] = a[2];
 	for (int i = 2; i < size; i++) {
 		if (b[i] == 0) {
-			std::cout << "Error";
+			std::cout << "Wrong matrix!\n";
 			return F;
 		}
 		R = 1 / b[i];
@@ -161,18 +161,22 @@ Vector Matrix::solution(Vector F) {
 		c[i] *= R;
 		F[i] *= R;
 
+	
+
+
 		R = a[i + 1];
 		a[i + 1] = 0;
 		r[i + 1] = -R * r[i];
 		b[i + 1] -= R * c[i];
 		F[i + 1] -= R * F[i];
 
+
 		R = p[i];
 		p[i] = 0;
 		p[1] -= R * r[i];
 		p[i + 1] -= R * c[i];
 		F[1] -= R * F[i];
-
+	
 		R = q[i];
 		q[i] = 0;
 		q[1] -= R * r[i];
@@ -181,7 +185,7 @@ Vector Matrix::solution(Vector F) {
 	}
 		c[1] = p[2];		
 		if (p[1] == 0) {
-			std::cout << "Error";
+			std::cout << "Wrong matrix!\n";
 			return F;
 		};
 		R = 1 / p[1];
@@ -189,14 +193,14 @@ Vector Matrix::solution(Vector F) {
 		p[1] = 1;
 		p[size] *= R;
 		F[1] *= R;
-
+	
 		R = q[1];
 		q[1] = 0;
 		q[size] -= R * p[size]; 
 		F[size] -= R * F[1];
-		
+	
 		if (q[size] == 0) {
-			std::cout << "Error";
+			std::cout << "Wrong matrix!\n";
 			return F;
 		};
 		
@@ -204,7 +208,7 @@ Vector Matrix::solution(Vector F) {
 		q[size] = 1;
 		b[size] = 1;
 		F[size] *= R;
-
+	
 		R = p[size];
 		p[size] = 0;
 		F[1] -= q[size] * R;
@@ -214,7 +218,7 @@ Vector Matrix::solution(Vector F) {
 			r[i] = 0;
 			F[i] -= R * F[size];
 		}
-
+		
 		Vector x(size);
 		x[size] = F[size];
 		for (int i = size - 1; i >= 2; i--) {
