@@ -9,8 +9,8 @@ class Vector {
 	double* nums;
 public:
 	Vector();
-	Vector(int _size);
-	Vector(double* _nums, int _size); // 
+	Vector(int _size);// create Vector with _size 
+	Vector(double* _nums, int _size); // create Vector with _size and fill it with nums[]
 	Vector(int _size, double val); // create Vector with _size and fill it with val
 	double& operator[](int i);
 	double& operator[](int i) const;

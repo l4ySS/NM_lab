@@ -39,7 +39,7 @@ void main(){
 	//double* nums5 = new double[5];
 
 	double nums6[] = { 2, 3, 5, 8, 4};
-	double nums7[] = { 2, 3, 5, 8, 4};
+
 	int size = 5;
 	Vector A(nums2, size);
 	Vector B(nums3, size);
@@ -58,8 +58,11 @@ void main(){
 	B[size] = Q[size];
 
 	Vector F(nums6, 5);
-	Vector X(nums6, 5);
-	Vector L(nums6, 5);
+//	Vector X(nums6, 5);
+//	Vector L(nums6, 5);
+	Vector X(size);
+	Vector L(size);
+	X.randomFill(-100, 100);
 	Matrix M(A, B, C, P, Q);
 	std::cout << M << "\n\n";
 	std::cout <<"Correct answer  = " << X << "\n\n";
