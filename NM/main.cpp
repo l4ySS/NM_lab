@@ -26,31 +26,31 @@ void main(){
 	//default:
 //	std::cout << abs(-2.3) << "\nWrong command!\n";
 	
-	/*double nums1[] = { 4, -1, -1, -1, -1 };
-	double nums2[] = { -1, -1, -1, -1 };
-	double nums3[] = { 4, 4, 4, 4, 4 };
-	double nums4[] = { -1, -1, -1, -1 };
-	double nums5[] = { -1, -1, -1, -1, 4 };*/
+	double nums1[] = { 15, 1, 1, 1, 1 };
+	double nums2[] = { 1, 1, 1, 1 };
+	double nums3[] = { 15, 15, 15, 15, 15 };
+	double nums4[] = { 1, 1, 1, 1 };
+	double nums5[] = { 1, 1, 1, 1, 15 };
 
-	double* nums1 = new double[5];
-	double* nums2 = new double[5];
-	double* nums3 = new double[5];
-	double* nums4 = new double[5];
-	double* nums5 = new double[5];
+	//double* nums1 = new double[5];
+	//double* nums2 = new double[5];
+	//double* nums3 = new double[5];
+	//double* nums4 = new double[5];
+	//double* nums5 = new double[5];
 
 	double nums6[] = { 2, 3, 5, 8, 4};
 	double nums7[] = { 2, 3, 5, 8, 4};
 	int size = 5;
-	Vector A(size);
-	Vector B(size);
-	Vector C(size);
-	Vector P(size);
-	Vector Q(size);
-	A.randomFill(1, 5);
+	Vector A(nums2, size);
+	Vector B(nums3, size);
+	Vector C(nums4, size);
+	Vector P(nums1, size);
+	Vector Q(nums5, size);
+	/*A.randomFill(1, 5);
 	B.randomFill(1, 5);
 	C.randomFill(1, 5);
 	P.randomFill(1, 5);
-	Q.randomFill(1, 5);
+	Q.randomFill(1, 5);*/
 	B[1] = P[1];
 	C[1] = P[2];
 

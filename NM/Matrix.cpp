@@ -146,9 +146,17 @@ void Matrix::write(std::string filename) {
 
 
 Vector Matrix::solution(Vector F) {
+	if ((p[1] == 0)||(q[size] == 0)) {
+		std::cout << "Wrong matrix!\n";
+		return F;
+	};
+
+
 	double R;
 	Vector r(size+1);
 	r[2] = a[2];
+
+
 	for (int i = 2; i < size; i++) {
 		if (b[i] == 0) {
 			std::cout << "Wrong matrix!\n";
@@ -160,8 +168,6 @@ Vector Matrix::solution(Vector F) {
 		r[i] *= R;
 		c[i] *= R;
 		F[i] *= R;
-
-	
 
 
 		R = a[i + 1];
@@ -184,10 +190,10 @@ Vector Matrix::solution(Vector F) {
 		F[size] -= R * F[i];
 	}
 		c[1] = p[2];		
-		if (p[1] == 0) {
+	/*	if (p[1] == 0) {
 			std::cout << "Wrong matrix!\n";
 			return F;
-		};
+		};*/
 		R = 1 / p[1];
 
 		p[1] = 1;
@@ -199,10 +205,10 @@ Vector Matrix::solution(Vector F) {
 		q[size] -= R * p[size]; 
 		F[size] -= R * F[1];
 	
-		if (q[size] == 0) {
+		/*if (q[size] == 0) {
 			std::cout << "Wrong matrix!\n";
 			return F;
-		};
+		};*/
 		
 		R = 1/q[size];
 		q[size] = 1;
@@ -221,10 +227,10 @@ Vector Matrix::solution(Vector F) {
 		
 		Vector x(size);
 		x[size] = F[size];
-		for (int i = size - 1; i >= 2; i--) {
+		for (int i = size - 1; i >= 1; i--) {
 			x[i] = F[i] - c[i] * x[i + 1];
 		}
-		x[1] = F[1] - p[size] * x[size];
+	//	x[1] = F[1];
 
 		
 	return x;
