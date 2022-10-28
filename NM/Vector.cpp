@@ -60,6 +60,7 @@ int Vector::getSize() const{
 
 void Vector::setSize(int _size) {
 	size = _size;
+	nums = new double[_size + 1];
 }
 
 
@@ -90,6 +91,7 @@ Vector Vector::operator-(Vector A) {
 
 Vector Vector::operator=(const Vector &A) {
 	size = A.getSize();
+	nums = new double[size + 1];
 	for (int i = 1; i < getSize() + 1; i++)
 		nums[i] = A[i];
 	return *this;
@@ -175,8 +177,20 @@ void Vector::write(std::string filename) {
 	fout.close();
 }
 
-void Vector::randomFill(int a, int b) {
+
+
+//void Vector::random(double a, double b) {
+//	for (int i = 1; i < size + 1; i++) {
+//		std::uniform_real_distribution<double> unif(a, b);
+//		std::default_random_engine re;
+//		nums[i] = unif(re);
+//	}
+//}
+
+void Vector::random(int a, int b) {
+	double temp;
 	for (int i = 1; i < size + 1; i++) {
-		nums[i] = a + rand() % (b - a + 1);
+		temp = a*MAX_RAND_POINT + rand()%(b * MAX_RAND_POINT - a * MAX_RAND_POINT);
+		nums[i] = temp / MAX_RAND_POINT;
 	}
 }

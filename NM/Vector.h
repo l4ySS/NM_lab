@@ -4,9 +4,11 @@
 #include <ctime>
 #include <math.h>
 
+
 class Vector {
 	int size;
 	double* nums;
+#define MAX_RAND_POINT 100
 public:
 	Vector();
 	Vector(int _size);// create Vector with _size 
@@ -36,5 +38,6 @@ public:
 	void read(std::string filename);
 	void write(std::string filename);
 
-	void randomFill(int a, int b);
+	void random(int a, int b);
+
 };
